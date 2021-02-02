@@ -5,6 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import PropertyDetails from './components/properties/PropertyDetails'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
+import CreateProperty from "./components/properties/CreateProperty";
 
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path='/property/:id' component={PropertyDetails} />
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
+            <Route path='/create' component={CreateProperty} />
           </Switch>
         </div>
       </BrowserRouter>
