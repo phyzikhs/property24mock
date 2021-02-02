@@ -8,6 +8,10 @@ const initState = {
 }
 
 const propertyReducer = (state = initState, action) => {
+  switch (action.type) {
+    case 'CREATE_PROPERTY':
+      console.log('created property', action.property);
+  }
   return state;
 };
 

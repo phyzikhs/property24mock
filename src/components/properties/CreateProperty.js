@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createProperty } from '../../store/actions/propertyActions'
 
 class CreateProperty extends Component {
   state = {
@@ -20,7 +22,8 @@ class CreateProperty extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
+    this.props.createProperty(this.state);
   }
   render() {
     return (
@@ -67,4 +70,10 @@ class CreateProperty extends Component {
   }
 }
 
-export default CreateProperty
+const mapDispatchToProps = dispatch => {
+  return {
+    createProperty: (property) => dispatch(createProperty(property))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(CreateProperty)
