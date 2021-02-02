@@ -4,7 +4,7 @@ import 'firebase/auth';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
+var fbConfig = {
   apiKey: "AIzaSyDbtUMDnWhw8MPEMIetw4-jRa7p8egZgHI",
   authDomain: "property24mock-bf46a.firebaseapp.com",
   projectId: "property24mock-bf46a",
@@ -14,7 +14,7 @@ var firebaseConfig = {
   measurementId: "G-81ZL19GNEX"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(fbConfig);
 firebase.analytics();
 
-export default firebase;
+export default fbConfig;
