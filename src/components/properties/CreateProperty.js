@@ -24,7 +24,7 @@ class CreateProperty extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container z-depth-1">
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Add new property listing</h5>
 
@@ -41,9 +41,9 @@ class CreateProperty extends Component {
             <input type="text" id="price" onChange={this.handleChange}/>
           </div>
           <div className="input-field">
-            <label htmlFor="file">Upload images:</label>
+            {/* <label htmlFor="file">Upload images:</label> */}
             <input type="file" id="images" accept="image/*" name="images" multiple onChange={this.handleFileUpload}/>
-            <img src="{this.state.images.length > 0 ? (this.state.images[0]) : (null) }" alt="No preview available" />
+            {/* <img src="{this.state.images.length > 0 ? (this.state.images[0]) : (null) }" alt="No preview available" /> */}
           </div>
           {/* <div className="input-field">
             <label id="load-desktop" role="tabpanel" className="load-cloud-content active" style="position: relative">
