@@ -2,16 +2,14 @@ import React from 'react'
 import PropertySummary from './PropertySummary'
 
 
-const PropertyList = () => {
+const PropertyList = ({properties}) => {
   return (
     <div className="project-list section">
-      <PropertySummary />
-      <PropertySummary />
-      <PropertySummary />
-      <PropertySummary />
-      <PropertySummary />
-      <PropertySummary />
-      <PropertySummary />
+      { properties && properties.map(property => {
+        return (
+          <PropertySummary property={property} key={property.id} />
+        )
+      })}
     </div>
   );
 }
