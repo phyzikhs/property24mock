@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { applyMiddleware, compose, createStore } from 'redux'
 import rootReducer from './store/reducers/rootReducer';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk';
 import firebase from 'firebase';
-import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { isLoaded, getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
 import fbConfig from './config/fbConfig';
 
@@ -23,17 +23,30 @@ const store = createStore( rootReducer,
   )
 );
 
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+}
+
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: rrfConfig, fbConfig,
   dispatch: store.dispatch,
   createFirestoreInstance // <- needed if using firestore
+}
+
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div className="center"> <p>Loading property24...</p></div>;
+      return children
 }
 
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+      <AuthIsLoaded>
+        <App />
+      </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')

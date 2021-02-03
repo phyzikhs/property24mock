@@ -9,7 +9,7 @@ import Notifications from "./Notifications";
 class Dashboard extends Component {
   render() {
     const {properties, auth} = this.props;
-    if (!isLoaded(auth)) return <span>Loading...</span>;
+    // if (!isLoaded(auth)) return <span>Loading...</span>;
     return (!isEmpty(auth)) ? (
       <div className='dashboard container'>
         <div className="row">
