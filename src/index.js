@@ -14,7 +14,7 @@ import fbConfig from './config/fbConfig';
 
  // reactReduxFirebase(firebase, fbConfig) store enhancer no longer exists.
  // See 'react-redux-firebase': http://react-redux-firebase.com/docs/v3-migration-guide.html
- 
+
 const store = createStore( rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
