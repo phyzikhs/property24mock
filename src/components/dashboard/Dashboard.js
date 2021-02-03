@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { isLoaded, isEmpty, firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
 import { compose } from "redux";
 import PropertyList from "../properties/PropertyList";
@@ -8,9 +8,9 @@ import Notifications from "./Notifications";
 
 class Dashboard extends Component {
   render() {
-
     const {properties, auth} = this.props;
-    return (auth.uid) ? (
+    if (!isLoaded(auth)) return <span>Loading...</span>;
+    return (!isEmpty(auth)) ? (
       <div className='dashboard container'>
         <div className="row">
           <div className="col s12 m6">
