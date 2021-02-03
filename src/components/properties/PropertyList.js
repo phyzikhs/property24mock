@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import PropertySummary from './PropertySummary'
 
 
@@ -7,7 +8,9 @@ const PropertyList = ({properties}) => {
     <div className="project-list section">
       { properties && properties.map(property => {
         return (
-          <PropertySummary property={property} key={property.id} />
+          <Link to={'property/'+property.id} key={property.id}>
+            <PropertySummary property={property} />
+          </Link>
         )
       })}
     </div>
