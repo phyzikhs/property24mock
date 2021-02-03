@@ -13,6 +13,15 @@ export const createProperty = (property) => {
       createdAt: new Date()
     }).then(() => {
       dispatch({type: 'CREATE_PROPERTY_SUCCESS', property: property});
+      firestore.collection('notifications').add({
+        content: 'Added a new listing',
+        user: `${profile.firstName} ${profile.lastName}`,
+        time: new Date ()
+      }).then( doc => {
+        console.log('Added a new listing', doc);
+      }).catch( err => {
+        console.log('New listng error', err);
+      })
     }).catch(err => {
       dispatch({type: 'CREATE_PROPERTY_ERROR', err});
     })

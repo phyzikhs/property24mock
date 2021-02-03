@@ -39,7 +39,16 @@ export const signUp = (newUser) => {
         initials: newUser.firstName[0]+newUser.lastName[0]
       })
     }).then(() => {
-      dispatch({type: 'SIGNUP_SUCCESS'})
+      dispatch({type: 'SIGNUP_SUCCESS'});
+      firestore.collection('notifications').add({
+        content: 'Joined the party',
+        user: `${newUser.firstName} ${newUser.lastName}`,
+        time: new Date ()
+      }).then( doc => {
+        console.log('Joined the party', doc);
+      }).catch( err => {
+        console.log('New user error', err);
+      })
     }).catch(err => {
       dispatch({type: 'SIGNUP_ERROR', err})
     })
