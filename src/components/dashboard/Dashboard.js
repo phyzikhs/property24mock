@@ -8,7 +8,7 @@ import Notifications from "./Notifications";
 
 class Dashboard extends Component {
   render() {
-    const {properties, auth} = this.props;
+    const {properties, auth, notifications} = this.props;
     // if (!isLoaded(auth)) return <span>Loading...</span>;
     return (!isEmpty(auth)) ? (
       <div className='dashboard container'>
@@ -17,7 +17,7 @@ class Dashboard extends Component {
             <PropertyList properties={properties}/>
           </div>
           <div className="col s12 m6 offse-1">
-            <Notifications />
+            <Notifications notifications={notifications}/>
           </div>
         </div>
       </div>
@@ -31,13 +31,15 @@ const mapStateToProps = (state) => {
   // console.log(state);
   return {
     properties: state.firestore.ordered.properties,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications
   }
 }
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'properties'}
+    { collection: 'properties'},
+    { collection: 'notifications', limit: 3}
   ])
 )(Dashboard);
