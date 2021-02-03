@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react'
 
 const PropertySummary = ({property}) => {
@@ -6,7 +7,7 @@ const PropertySummary = ({property}) => {
       <div className="card-content grey-text text-darken-3">
         <span className="card-title ">{property.propertyName}</span>
         <p>Posted by {property.authorFirstName} {property.authorLastName}</p>
-        <p className="grey-text">{property.createdAt.toDate().toString()}</p>
+        <p className="grey-text">{moment(property.createdAt.toDate()).calendar()}</p>
       </div>
     </div>
   );
