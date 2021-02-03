@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { createProperty } from '../../store/actions/propertyActions'
 
 class CreateProperty extends Component {
@@ -27,7 +28,8 @@ class CreateProperty extends Component {
     this.props.history.push('/');
   }
   render() {
-    return (
+    const {auth} = this.props;
+    return (auth.uid) ? (
       <div className="container z-depth-1">
         <form onSubmit={this.handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Add new property listing</h5>
@@ -67,7 +69,15 @@ class CreateProperty extends Component {
           </div>
         </form>
       </div>
+    ) : (
+      <Redirect to='/' />
     )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
   }
 }
 
@@ -77,4 +87,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(CreateProperty)
+export default connect(mapStateToProps,mapDispatchToProps)(CreateProperty)

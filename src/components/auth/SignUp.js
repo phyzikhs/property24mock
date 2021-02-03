@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { signUp } from '../../store/actions/authActions'
 
 class SignUp extends Component {
@@ -21,6 +22,12 @@ class SignUp extends Component {
     this.props.signUp(this.state);
   }
   render() {
+    const { auth, authError } = this.props;
+    if (auth.uid){
+      return (
+        <Redirect to='/' />
+      )
+    }
     return (
       <div className="container z-depth-1">
         <form onSubmit={this.handleSubmit} className="white">
@@ -43,6 +50,9 @@ class SignUp extends Component {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Register</button>
+            <div className="red-text center">
+              { authError ? <p>{ authError }</p> : null }
+            </div>
           </div>
         </form>
       </div>

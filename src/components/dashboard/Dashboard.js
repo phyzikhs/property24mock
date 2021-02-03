@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { Redirect } from "react-router-dom";
 import { compose } from "redux";
 import PropertyList from "../properties/PropertyList";
 import Notifications from "./Notifications";
@@ -8,8 +9,8 @@ import Notifications from "./Notifications";
 class Dashboard extends Component {
   render() {
 
-    const {properties} = this.props;
-    return (
+    const {properties, auth} = this.props;
+    return (auth.uid) ? (
       <div className='dashboard container'>
         <div className="row">
           <div className="col s12 m6">
@@ -20,14 +21,17 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
-    )
+    ) : (
+        <Redirect to='/login' />
+      )
   }
 }
 
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    properties: state.firestore.ordered.properties
+    properties: state.firestore.ordered.properties,
+    auth: state.firebase.auth
   }
 }
 
