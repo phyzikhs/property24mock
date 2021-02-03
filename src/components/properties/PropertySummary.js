@@ -6,7 +6,7 @@ const PropertySummary = ({property}) => {
       <div className="card-content grey-text text-darken-3">
         <span className="card-title ">{property.propertyName}</span>
         <p>Posted by {property.authorFirstName} {property.authorLastName}</p>
-        <p className="grey-text">3rd September, 2am</p>
+        <p className="grey-text">{property.createdAt.toDate().toString()}</p>
       </div>
     </div>
   );
