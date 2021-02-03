@@ -7,22 +7,34 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { getFirebase, reactReduxFirebase } from 'react-redux-firebase';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
+import firebase from 'firebase';
+import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
 import fbConfig from './config/fbConfig';
 
-const store = createStore(rootReducer,
+ // reactReduxFirebase(firebase, fbConfig) store enhancer no longer exists.
+ // See 'react-redux-firebase': http://react-redux-firebase.com/docs/v3-migration-guide.html
+ 
+const store = createStore( rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-    reactReduxFirebase(fbConfig), // redux binding for firebase
-    reduxFirestore(fbConfig) // redux bindings for firestore
+    reduxFirestore(fbConfig), // redux bindings for firestore
+    // reactReduxFirebase(firebase, fbConfig) // redux binding for firebase
   )
 );
 
+const rrfProps = {
+  firebase,
+  config: fbConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
+}
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <App />
+    </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
 );

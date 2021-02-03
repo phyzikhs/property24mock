@@ -16,5 +16,6 @@ var fbConfig = {
 // Initialize Firebase
 firebase.initializeApp(fbConfig);
 firebase.analytics();
+// firebase.firestore().settings({ timestampsInSnapshots: true }); // no need te set time stamp
 
-export default fbConfig;
+export default firebase;

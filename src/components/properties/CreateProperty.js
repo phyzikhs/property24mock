@@ -24,6 +24,7 @@ class CreateProperty extends Component {
     e.preventDefault();
     // console.log(this.state);
     this.props.createProperty(this.state);
+    this.props.history.push('/');
   }
   render() {
     return (
