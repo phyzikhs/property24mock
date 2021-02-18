@@ -15,7 +15,10 @@ const propertyReducer = (state = initState, action) => {
     case 'CREATE_PROPERTY_ERROR':
       console.log('create project error', action.err);
       return state;
+    case 'PROPERTY_PIC_UPLOADED':
+      console.log('Photo uploaded.');
     default:
+      // console.log("Ran into default reducer", action);
       return state;
   }
 };

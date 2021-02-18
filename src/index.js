@@ -10,14 +10,14 @@ import thunk from 'redux-thunk';
 import firebase from 'firebase';
 import { isLoaded, getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore, createFirestoreInstance } from 'redux-firestore';
-import fbConfig from './config/fbConfig';
+import fbConfig, {storage} from './config/fbConfig';
 
  // reactReduxFirebase(firebase, fbConfig) store enhancer no longer exists.
  // See 'react-redux-firebase': http://react-redux-firebase.com/docs/v3-migration-guide.html
 
 const store = createStore( rootReducer,
   compose(
-    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore, storage})),
     reduxFirestore(fbConfig), // redux bindings for firestore
     // reactReduxFirebase(firebase, fbConfig) // redux binding for firebase
   )

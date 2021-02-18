@@ -1,10 +1,11 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var fbConfig = {
+const fbConfig = {
   apiKey: "AIzaSyDbtUMDnWhw8MPEMIetw4-jRa7p8egZgHI",
   authDomain: "property24mock-bf46a.firebaseapp.com",
   projectId: "property24mock-bf46a",
@@ -16,6 +17,7 @@ var fbConfig = {
 // Initialize Firebase
 firebase.initializeApp(fbConfig);
 firebase.analytics();
+const storage = firebase.storage();
 // firebase.firestore().settings({ timestampsInSnapshots: true }); // no need te set time stamp
 
-export default firebase;
+export {storage, fbConfig, firebase as default};

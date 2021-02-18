@@ -16,7 +16,7 @@ class Dashboard extends Component {
           <div className="col s12 m6">
             <PropertyList properties={properties}/>
           </div>
-          <div className="col s12 m6 offse-1">
+          <div className="col s7 m6 offse-1">
             <Notifications notifications={notifications}/>
           </div>
         </div>

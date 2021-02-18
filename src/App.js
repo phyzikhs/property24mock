@@ -6,6 +6,7 @@ import PropertyDetails from './components/properties/PropertyDetails'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import CreateProperty from "./components/properties/CreateProperty";
+import Profile from "./components/auth/Profile";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path='/property/:id' component={PropertyDetails} />
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
+            <Route path='/profile' component={Profile} />
             <Route path='/create' component={CreateProperty} />
             <Route path='' component={Dashboard} />
           </Switch>

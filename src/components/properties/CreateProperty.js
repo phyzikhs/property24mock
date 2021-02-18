@@ -8,27 +8,52 @@ class CreateProperty extends Component {
     propertyName: "",
     propertyAddress: "",
     price: "",
-    // images: FileList
+    imagesWithURL: []
   }
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     })
   }
-  /*handleFileUpload = (e) => {
-    // console.log(e.target.files);
-    this.setState({
-      images: e.target.files
+  handleFileChange = (e) => {
+    const images = Array.from(e.target.files);
+    // console.log(images);
+    const imagesWithURL = images.map(file => {
+      var url = URL.createObjectURL(file);
+      return {id: Date.now()+file.name+Math.ceil(Math.random()), url: url, image: file};
     });
-  }*/
+    // console.log(imagesWithURL);
+    this.setState({
+      imagesWithURL: [...this.state.imagesWithURL, ...imagesWithURL]
+    });
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log(this.state);
-    this.props.createProperty(this.state);
-    this.props.history.push('/');
+    if (
+      this.state.propertyName!=null
+      & this.state.propertyAddress!=null
+      & this.state.price!=null
+      & this.state.imagesWithURL.length>0
+    ) {
+      this.props.createProperty(this.state);
+      this.props.history.push('/');
+    }
   }
   render() {
     const {auth} = this.props;
+    const imageDivs = this.state.imagesWithURL ? (
+      this.state.imagesWithURL.map(imageWithURL => {
+        return (
+          <div className="col s1 m1 image-content" key={imageWithURL.id}>
+            <img src={imageWithURL.url} alt="property" />
+          </div>
+        );
+      })
+    ) : (null);
+    // console.log(this.state.imagesWithURL);
+    // console.log(imageDivs);
+    // console.log(imageDivs.length>0);
     return (auth.uid) ? (
       <div className="container z-depth-1">
         <form onSubmit={this.handleSubmit} className="white">
@@ -45,6 +70,17 @@ class CreateProperty extends Component {
           <div className="input-field">
             <label htmlFor="price">Price</label>
             <input type="text" id="price" onChange={this.handleChange}/>
+          </div>
+          <div className="property-images">
+            <div onClick={() => this.fileInput.click()} className="col s1 m1 image-content uploadBtn">Choose Photos to Upload</div>
+            {imageDivs}
+            <input
+              style={{display: 'none'}}
+              type="file" onChange={this.handleFileChange}
+              ref={fileInput => this.fileInput = fileInput}
+              accept="image/*" multiple
+            />
+            
           </div>
           {/* <div className="input-field">
             <label htmlFor="file">Upload images:</label>
